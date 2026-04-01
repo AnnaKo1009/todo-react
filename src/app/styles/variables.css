@@ -1,0 +1,14 @@
+@import '@fontsource/geologica/800.css';
+@import '@fontsource/montserrat/400.css';
+@import '@fontsource/montserrat/600.css';
+
+:root {
+  --font-title: 'Geologica', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 600;
+  --font-weight-bold: 800;
+
+  --background-color: #1470AF;
+
+}
