@@ -9,6 +9,16 @@
   --font-weight-medium: 600;
   --font-weight-bold: 800;
 
-  --background-color: #1470AF;
+  --font-size-text: 24px;
+  --font-size-title: 60px;
+
+  --line-height-text: 24px;
+  --line-height-title: 48px;
+
+  --background-color: #0f5381;
+  --disabled-button-color: #CCCCCC;
+  --hover-button-color: #a6b6cb;
+  --active-button-color: #aad5f2;
+  --input-color: #505050;
 
 }
