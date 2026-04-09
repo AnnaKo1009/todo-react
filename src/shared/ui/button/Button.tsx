@@ -6,7 +6,8 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   disabled = false,
   onClick,
-  className = ''
+  className = '', 
+  variant = 'primary'
 }) => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (!disabled && onClick) {
@@ -16,7 +17,7 @@ export const Button: React.FC<ButtonProps> = ({
   return (
     <button
       disabled={disabled}
-      className={`${styles.button} ${className}`.trim()}
+      className={`${styles.button} ${styles[variant]} ${className}`.trim()}
       onClick={handleClick}
     >
       {children}

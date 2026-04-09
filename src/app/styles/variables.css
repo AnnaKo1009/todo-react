@@ -9,8 +9,8 @@
   --font-weight-medium: 600;
   --font-weight-bold: 800;
 
-  --font-size-text: 24px;
-  --font-size-title: 60px;
+  --font-size-text: 20px;
+  --font-size-title: 45px;
 
   --line-height-text: 24px;
   --line-height-title: 48px;
@@ -20,5 +20,7 @@
   --hover-button-color: #a6b6cb;
   --active-button-color: #aad5f2;
   --input-color: #505050;
+  --card-color: #0f161d;
+  --primary-button-color: #F2F2F2;
 
 }

@@ -1,25 +1,44 @@
 .button {
-  padding: 21px;
-  border-radius: 15px;
   font-family: var(--font-body);
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-text);
   font-style: normal;
   border: none;
-  margin-left: 10px;
   cursor: pointer;
 }
 
 .button:disabled {
-  background-color: var(--disabled-button-color);
-  color: #606060;
   cursor: not-allowed;
 }
 
-.button:hover:not(:disabled) {
+.primary {
+  padding: 21px;
+  border-radius: 15px;
+  background-color: var(--primary-button-color);
+  color: var(--card-color);
+}
+
+.primary:disabled {
+  background-color: var(--disabled-button-color);
+  color: #606060;
+}
+
+.primary:hover:not(:disabled) {
   background-color: var(--hover-button-color);
 }
 
-.button:active:not(:disabled) {
+.primary:active:not(:disabled) {
   background-color: var(--active-button-color);
+}
+
+.icon {
+  padding: 4px;
+  border-radius: 4px;
+  background: none;
+  color: inherit;
+}
+
+.icon:disabled {
+  background: none;
+  opacity: 0.5;
 }

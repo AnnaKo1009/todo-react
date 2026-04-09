@@ -4,4 +4,6 @@ export interface ButtonProps {
     disabled?: boolean;
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
     className?: string;
+    variant?: 'primary' | 'icon';
+    
 }
