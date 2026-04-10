@@ -1,7 +1,5 @@
 .page {
   min-height: 100vh;
-  margin: -8px;
-  width: calc(100% + 16px);
   background-image: url('../../assets/pictures/1.png');
   background-size: cover;
   background-position: center;
@@ -9,7 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 20px;
+  padding: 20px;
 
 }
 

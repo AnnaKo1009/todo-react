@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import itemsData from '../../../public/db/items.json';
 import { InputForm } from '../../widgets/inputForm';
 import { ItemCard } from '../../widgets/itemCard';
+import { Modal } from '../../shared/ui/modal';
 import styles from './MainPage.module.css';
 
 export const MainPage = () => {
   const [items, setItems] = useState(itemsData.items);
   const [newItem, setNewItem] = useState('');
   const [now, setNow] = useState(new Date());
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editingItem, setEditingItem] = useState<{ id: number; name: string } | null>(null);
+  const [editValue, setEditValue] = useState('');
 
   const handleDeleteItem = (id: number) => {
     setItems(items.filter((item) => item.id !== id));
@@ -23,15 +28,36 @@ export const MainPage = () => {
     }
   };
 
-  // тут нужно будет поменять!
-  const handleEditItem = (id: number) => {
-    console.log('Edit', id);
+// обработчик редактирования дела
+  const handleEditClick = (id: number) => {
+    const item = items.find((i) => i.id === id);
+    if (item) {
+      setEditingItem(item);
+      setEditValue(item.name);
+      setIsEditModalOpen(true);
+    }
   };
+
+  // сохранение отредактированного дела
+  const handleSaveEdit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    if (editValue.trim() && editingItem) {
+      setItems(items.map(item =>
+        item.id === editingItem.id
+          ? { ...item, name: editValue }
+          : item
+      ));
+      setIsEditModalOpen(false);
+      setEditingItem(null);
+      setEditValue('');
+    }
+  };
+
 
   const handleAddItem = (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (newItem.trim()) {
-      setItems([...items, { id: Date.now(), name: newItem }]);
+      setItems([{ id: Date.now(), name: newItem }, ...items,]);
       setNewItem('');
     }
   };
@@ -62,12 +88,23 @@ export const MainPage = () => {
           <ItemCard 
             key={item.id}
             item={item}
-            onEdit={handleEditItem}
+            onEdit={handleEditClick}
             onDelete={handleDeleteItem}
             onCopy={handleCopyItem}
           />
         ))}
       </div>
+
+  <Modal isOpen={isEditModalOpen}
+  onClose={() => setIsEditModalOpen(false)}>
+  <InputForm
+        value={editValue}
+        onChange={(e) => setEditValue(e.target.value)}
+        onSubmit={handleSaveEdit}
+        placeholder='Редактировать дело'
+        buttonText='Сохранить'
+      />
+      </Modal>
     </div>
 );
 }
