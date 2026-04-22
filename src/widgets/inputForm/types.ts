@@ -7,4 +7,5 @@ export interface InputFormProps {
   buttonText?: string;
   disabled?: boolean;
   className?: string;
+  error?: string;
 }

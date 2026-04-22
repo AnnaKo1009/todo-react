@@ -1,9 +1,11 @@
 
+export interface Item {
+    id: number;
+    name:string;
+}
+
 export interface ItemCardProps {
-    item: {
-        id: number;
-        name: string;
-    };
+    item: Item;
     onEdit?: (id: number) => void;
     onCopy?: (id: number) => void;
     onDelete?: (id: number) => void;

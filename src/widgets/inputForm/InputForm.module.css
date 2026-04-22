@@ -1,9 +1,25 @@
 .formContainer {
   display: flex;
-  gap: 20px;
-  align-items: center;
+  flex-direction: column;
+  gap: 4px; 
   width: 100%;
-  padding: 50px 0 ;
-  
+  padding: 50px 0;
+}
 
+.inputRow {
+  display: flex;
+  gap: 20px;
+  align-items: center; 
+  width: 100%;
+}
+
+.inputWrapper {
+  flex: 1; 
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  font-size: var(--font-size-error);
+  font-size: var(--font-body);
 }

@@ -4,23 +4,26 @@ import { Input } from '../../shared/ui/input';
 import { Button } from '../../shared/ui/button';
 import styles from './InputForm.module.css';
 
-
 export const InputForm: React.FC<InputFormProps> = ({
-    value =  '',
-    onChange,
-    onSubmit,
-    placeholder = '',
-    buttonText = '',
-    className = ''
+  value = '',
+  onChange,
+  onSubmit,
+  placeholder = '',
+  buttonText = '',
+  className = '',
+  error
 }) => {
-    return (
-        <form onSubmit={onSubmit} className={`${styles.formContainer} ${className}`.trim()}>
-        <Input value={value} onChange={onChange} placeholder={placeholder}/>
+  return (
+    <form className={styles.formContainer}>
+      <div className={styles.inputRow}>
+        <div className={styles.inputWrapper}>
+          <Input value={value} onChange={onChange} placeholder={placeholder} />
+        </div>
         <Button onClick={onSubmit} variant='primary'>
-            {buttonText}
+          {buttonText}
         </Button>
-        </form>
-    );
-
+      </div>
+      <span className={styles.error}>{error}</span>
+    </form>
+  );
 };
-

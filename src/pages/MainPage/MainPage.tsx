@@ -1,18 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import itemsData from '../../../public/db/items.json';
 import { InputForm } from '../../widgets/inputForm';
 import { ItemCard } from '../../widgets/itemCard';
 import { Modal } from '../../shared/ui/modal';
 import styles from './MainPage.module.css';
+import type { Item } from '../../widgets/itemCard/types';
+
+const LOCAL_STORAGE_KEY = 'items';
 
 export const MainPage = () => {
-  const [items, setItems] = useState(itemsData.items);
+  // загружаем данные из локалСт, функция выполнится единожды, избегая лишних ре-рендеров
+  const [items, setItems] = useState<Item[]>(() => {
+    const savedItems = localStorage.getItem(LOCAL_STORAGE_KEY);
+      
+    return savedItems ? JSON.parse(savedItems) : [] ;
+  });
+
   const [newItem, setNewItem] = useState('');
   const [now, setNow] = useState(new Date());
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<{ id: number; name: string } | null>(null);
   const [editValue, setEditValue] = useState('');
+  const [error, setError] = useState('');
+
+  // сохраняем в localStorage
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(items));
+  }, [items]);
+
 
   const handleDeleteItem = (id: number) => {
     setItems(items.filter((item) => item.id !== id));
@@ -53,12 +68,16 @@ export const MainPage = () => {
     }
   };
 
-
+ 
   const handleAddItem = (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (newItem.trim()) {
       setItems([{ id: Date.now(), name: newItem }, ...items,]);
       setNewItem('');
+      setError('');
+    } else {
+      setError('Введите дело');
+
     }
   };
 
@@ -70,6 +89,7 @@ export const MainPage = () => {
     return () => clearInterval(timer);
   }, []);
 
+
   return (
     <div className={styles.page}>
       <h1 className={styles.title}>Список дел</h1>
@@ -77,14 +97,15 @@ export const MainPage = () => {
       <div className={styles.formContainer}>
       <InputForm
         value={newItem}
-        onChange={(e) => setNewItem(e.target.value)}
+        onChange={(e) => {setNewItem(e.target.value); setError('')}}
         onSubmit={handleAddItem}
         placeholder='Добавить следующее дело...'
         buttonText='Добавить'
+        error={error}
       />
     </div>
 <div className={styles.itemsContainer}>
-        {items.map(item => (
+        {items.map(item => ( 
           <ItemCard 
             key={item.id}
             item={item}

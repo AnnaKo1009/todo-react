@@ -3,7 +3,7 @@ import type { ModalProps } from './types';
 import styles from './Modal.module.css';
 import { Button } from '../button';
 import { Icon } from '../icon';
-
+import { createPortal } from 'react-dom';
 
 export const Modal: React.FC<ModalProps> = ({
   isOpen,
@@ -50,7 +50,7 @@ export const Modal: React.FC<ModalProps> = ({
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div className={`${styles.overlay} ${overlayClassName}`.trim()} onClick={handleOverlayClick}>
       <div className={`${styles.modal} ${className}`.trim()}>
         <Button variant='icon' onClick={onClose} className={styles.closeButton}>
@@ -58,6 +58,6 @@ export const Modal: React.FC<ModalProps> = ({
         </Button>
         <div className={styles.content}>{children}</div>
       </div>
-    </div>
+    </div>, document.body
   );
 };
